@@ -10,349 +10,436 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    @Override
-    public void start(Stage stage) {
+        @Override
+        public void start(Stage stage) {
 
-        Label title = new Label("Student Academic Tracker");
+                Label title = new Label("Student Academic Tracker");
 
-        Label studentSection = new Label("Student Information");
+                Label studentSection = new Label("Student Information");
 
-        Label subjectSection = new Label("Subject Details");
+                Label subjectSection = new Label("Subject Details");
 
-        Label resultSection = new Label("Results");
+                Label resultSection = new Label("Results");
 
-        studentSection.setStyle(
-                "-fx-font-size:16px; -fx-font-weight:bold;");
+                studentSection.setStyle(
+                                "-fx-font-size:16px; -fx-font-weight:bold;");
 
-        subjectSection.setStyle(
-                "-fx-font-size:16px; -fx-font-weight:bold;");
+                subjectSection.setStyle(
+                                "-fx-font-size:16px; -fx-font-weight:bold;");
 
-        resultSection.setStyle(
-                "-fx-font-size:16px; -fx-font-weight:bold;");
+                resultSection.setStyle(
+                                "-fx-font-size:16px; -fx-font-weight:bold;");
 
-        title.setStyle(
-                "-fx-font-size: 22px;" +
-                        "-fx-font-weight: bold;");
+                title.setStyle(
+                                "-fx-font-size: 22px;" +
+                                                "-fx-font-weight: bold;");
 
-        TextField nameField = new TextField();
-        nameField.setPromptText("Enter Student Name");
+                TextField nameField = new TextField();
+                nameField.setPromptText("Enter Student Name");
 
-        TextField regField = new TextField();
-        regField.setPromptText("Enter Register Number");
+                TextField regField = new TextField();
+                regField.setPromptText("Enter Register Number");
 
-        TextField deptField = new TextField();
-        deptField.setPromptText("Enter Department");
+                TextField deptField = new TextField();
+                deptField.setPromptText("Enter Department");
 
-        TextField semField = new TextField();
-        semField.setPromptText("Enter Semester");
+                TextField semField = new TextField();
+                semField.setPromptText("Enter Semester");
 
-        TextField subjectField = new TextField();
-        subjectField.setPromptText("Subject Name");
+                TextField subjectField = new TextField();
+                subjectField.setPromptText("Subject Name");
 
-        TextField creditField = new TextField();
-        creditField.setPromptText("Credit");
+                TextField creditField = new TextField();
+                creditField.setPromptText("Credit");
 
-        Button submitButton = new Button("Submit");
+                Button submitButton = new Button("Submit");
 
-        ComboBox<String> gradeBox = new ComboBox<>();
+                ComboBox<String> gradeBox = new ComboBox<>();
 
-        gradeBox.getItems().addAll(
-                "O",
-                "A+",
-                "A",
-                "B+",
-                "B",
-                "C");
+                gradeBox.getItems().addAll(
+                                "O",
+                                "A+",
+                                "A",
+                                "B+",
+                                "B",
+                                "C");
 
-        gradeBox.setPromptText("Select Grade");
+                gradeBox.setPromptText("Select Grade");
 
-        Button addSubjectButton = new Button("Add Subject");
-        addSubjectButton.setPrefWidth(150);
+                Button addSubjectButton = new Button("Add Subject");
+                addSubjectButton.setPrefWidth(150);
 
-        Button calculateButton = new Button("Calculate GPA");
-        calculateButton.setPrefWidth(150);
+                Button calculateButton = new Button("Calculate GPA");
+                calculateButton.setPrefWidth(150);
 
-        Button saveButton = new Button("Save Report");
-        saveButton.setPrefWidth(150);
+                Button saveButton = new Button("Save Report");
+                saveButton.setPrefWidth(150);
 
-        Label resultLabel = new Label();
+                Label resultLabel = new Label();
 
-        Label gpaLabel = new Label("GPA will appear here");
+                Label cgpaSection = new Label("CGPA Calculator");
 
-        gpaLabel.setWrapText(true);
-        gpaLabel.setMinHeight(60);
+                cgpaSection.setStyle(
+                                "-fx-font-size:16px; -fx-font-weight:bold;");
 
-        gpaLabel.setText("Testing Label");
+                Label gpaLabel = new Label("GPA will appear here");
 
-        gpaLabel.setStyle(
-                "-fx-font-size:16px;" +
-                        "-fx-font-weight:bold;");
+                TextField semesterGpaField = new TextField();
 
-        TableView<SubjectData> table = new TableView<>();
+                semesterGpaField.setPromptText(
+                                "Enter Semester GPA");
 
-        TableColumn<SubjectData, String> subjectCol = new TableColumn<>("Subject");
+                Button addGpaButton = new Button("Add GPA");
 
-        TableColumn<SubjectData, String> creditCol = new TableColumn<>("Credit");
+                Button calculateCgpaButton = new Button("Calculate CGPA");
 
-        TableColumn<SubjectData, String> gradeCol = new TableColumn<>("Grade");
+                TextArea cgpaArea = new TextArea();
+                cgpaArea.setPrefHeight(120);
 
-        subjectCol.setCellValueFactory(
-                new PropertyValueFactory<>("subject"));
+                cgpaArea.setEditable(false);
 
-        creditCol.setCellValueFactory(
-                new PropertyValueFactory<>("credit"));
+                Label cgpaResultLabel = new Label();
 
-        gradeCol.setCellValueFactory(
-                new PropertyValueFactory<>("grade"));
+                gpaLabel.setWrapText(true);
+                gpaLabel.setMinHeight(60);
 
-        table.getColumns().addAll(
-                subjectCol,
-                creditCol,
-                gradeCol);
+                gpaLabel.setStyle(
+                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;");
 
-        table.setPrefHeight(150);
+                TableView<SubjectData> table = new TableView<>();
 
-        table.setMinHeight(150);
+                TableColumn<SubjectData, String> subjectCol = new TableColumn<>("Subject");
 
-        table.setColumnResizePolicy(
-                TableView.CONSTRAINED_RESIZE_POLICY);
+                TableColumn<SubjectData, String> creditCol = new TableColumn<>("Credit");
 
-        subjectCol.setPrefWidth(400);
-        creditCol.setPrefWidth(150);
-        gradeCol.setPrefWidth(150);
+                TableColumn<SubjectData, String> gradeCol = new TableColumn<>("Grade");
 
-        Label saveStatusLabel = new Label();
+                subjectCol.setCellValueFactory(
+                                new PropertyValueFactory<>("subject"));
 
-        gpaLabel.setWrapText(true);
-        gpaLabel.setMinHeight(80);
+                creditCol.setCellValueFactory(
+                                new PropertyValueFactory<>("credit"));
 
-        TextArea subjectsArea = new TextArea();
+                gradeCol.setCellValueFactory(
+                                new PropertyValueFactory<>("grade"));
 
-        subjectsArea.setEditable(false);
-        subjectsArea.setPrefHeight(150);
+                table.getColumns().addAll(
+                                subjectCol,
+                                creditCol,
+                                gradeCol);
 
-        ObservableList<String> subjects = FXCollections.observableArrayList();
+                table.setPrefHeight(250);
 
-        double[] totalPoints = { 0 };
-        int[] totalCredits = { 0 };
+                table.setMinHeight(250);
 
-        addSubjectButton.setOnAction(e -> {
+                table.setColumnResizePolicy(
+                                TableView.CONSTRAINED_RESIZE_POLICY);
 
-            String subject = subjectField.getText();
+                subjectCol.setPrefWidth(400);
+                creditCol.setPrefWidth(150);
+                gradeCol.setPrefWidth(150);
 
-            String credit = creditField.getText();
+                Label saveStatusLabel = new Label();
 
-            String grade = gradeBox.getValue();
+                gpaLabel.setWrapText(true);
+                gpaLabel.setMinHeight(80);
 
-            int gradePoint = 0;
+                TextArea subjectsArea = new TextArea();
 
-            switch (grade) {
-                case "O":
-                    gradePoint = 10;
-                    break;
-                case "A+":
-                    gradePoint = 9;
-                    break;
-                case "A":
-                    gradePoint = 8;
-                    break;
-                case "B+":
-                    gradePoint = 7;
-                    break;
-                case "B":
-                    gradePoint = 6;
-                    break;
-                case "C":
-                    gradePoint = 5;
-                    break;
-            }
+                subjectsArea.setEditable(false);
+                subjectsArea.setPrefHeight(150);
 
-            totalPoints[0] += Integer.parseInt(credit) * gradePoint;
+                ObservableList<String> subjects = FXCollections.observableArrayList();
 
-            totalCredits[0] += Integer.parseInt(credit);
+                double[] totalPoints = { 0 };
+                int[] totalCredits = { 0 };
 
-            String row = subject + "    |    "
-                    + credit + "    |    "
-                    + grade;
+                java.util.ArrayList<Double> gpaList = new java.util.ArrayList<>();
 
-            subjects.add(row);
+                addSubjectButton.setOnAction(e -> {
 
-            table.getItems().add(
-                    new SubjectData(
-                            subject,
-                            credit,
-                            grade));
+                        String subject = subjectField.getText();
 
-            subjectsArea.clear();
+                        String credit = creditField.getText();
 
-            subjectsArea.appendText(
-                    "Subject | Credit | Grade\n");
-            subjectsArea.appendText(
-                    "-------------------------\n");
+                        String grade = gradeBox.getValue();
 
-            for (String s : subjects) {
+                        int gradePoint = 0;
 
-                subjectsArea.appendText(
-                        s + "\n");
-            }
+                        switch (grade) {
+                                case "O":
+                                        gradePoint = 10;
+                                        break;
+                                case "A+":
+                                        gradePoint = 9;
+                                        break;
+                                case "A":
+                                        gradePoint = 8;
+                                        break;
+                                case "B+":
+                                        gradePoint = 7;
+                                        break;
+                                case "B":
+                                        gradePoint = 6;
+                                        break;
+                                case "C":
+                                        gradePoint = 5;
+                                        break;
+                        }
 
-            subjectField.clear();
-            creditField.clear();
-            gradeBox.setValue(null);
-        });
+                        totalPoints[0] += Integer.parseInt(credit) * gradePoint;
 
-        calculateButton.setOnAction(e -> {
+                        totalCredits[0] += Integer.parseInt(credit);
 
-            if (totalCredits[0] == 0) {
+                        String row = subject + "    |    "
+                                        + credit + "    |    "
+                                        + grade;
 
-                gpaLabel.setText(
-                        "No subjects added.");
+                        subjects.add(row);
 
-                return;
-            }
+                        table.getItems().add(
+                                        new SubjectData(
+                                                        subject,
+                                                        credit,
+                                                        grade));
 
-            double gpa = totalPoints[0] / totalCredits[0];
+                        subjectsArea.clear();
 
-            String performance;
+                        subjectsArea.appendText(
+                                        "Subject | Credit | Grade\n");
+                        subjectsArea.appendText(
+                                        "-------------------------\n");
 
-            if (gpa >= 9) {
+                        for (String s : subjects) {
 
-                performance = "Outstanding";
+                                subjectsArea.appendText(
+                                                s + "\n");
+                        }
 
-            } else if (gpa >= 8) {
+                        subjectField.clear();
+                        creditField.clear();
+                        gradeBox.setValue(null);
+                });
 
-                performance = "Excellent";
+                calculateButton.setOnAction(e -> {
 
-            } else if (gpa >= 7) {
+                        if (totalCredits[0] == 0) {
 
-                performance = "Good";
+                                gpaLabel.setText(
+                                                "No subjects added.");
 
-            } else {
+                                return;
+                        }
 
-                performance = "Needs Improvement";
-            }
+                        double gpa = totalPoints[0] / totalCredits[0];
 
-            gpaLabel.setText(
-                    "GPA : "
-                            + String.format("%.2f", gpa)
-                            + "\nPerformance : "
-                            + performance);
+                        String performance;
 
-        });
+                        if (gpa >= 9) {
 
-        saveButton.setOnAction(e -> {
+                                performance = "Outstanding";
 
-            try {
+                        } else if (gpa >= 8) {
 
-                java.io.FileWriter writer = new java.io.FileWriter(
-                        "student_report.txt");
+                                performance = "Excellent";
 
-                writer.write(
-                        "STUDENT ACADEMIC REPORT\n\n");
+                        } else if (gpa >= 7) {
 
-                writer.write(
-                        "Name : "
-                                + nameField.getText()
-                                + "\n");
+                                performance = "Good";
 
-                writer.write(
-                        "Register No : "
-                                + regField.getText()
-                                + "\n");
+                        } else {
 
-                writer.write(
-                        "Department : "
-                                + deptField.getText()
-                                + "\n");
+                                performance = "Needs Improvement";
+                        }
 
-                writer.write(
-                        "Semester : "
-                                + semField.getText()
-                                + "\n\n");
+                        gpaLabel.setText(
+                                        "GPA : "
+                                                        + String.format("%.2f", gpa)
+                                                        + "\nPerformance : "
+                                                        + performance);
 
-                writer.write(
-                        subjectsArea.getText());
+                });
 
-                writer.write("\n\n");
+                addGpaButton.setOnAction(e -> {
 
-                writer.write(
-                        gpaLabel.getText());
+                        try {
 
-                writer.close();
+                                double gpa = Double.parseDouble(
+                                                semesterGpaField.getText());
 
-                saveStatusLabel.setText(
-                        "Report Saved Successfully!");
+                                gpaList.add(gpa);
 
-            } catch (Exception ex) {
+                                cgpaArea.appendText(
+                                                "Semester "
+                                                                + gpaList.size()
+                                                                + " GPA : "
+                                                                + gpa
+                                                                + "\n");
 
-                saveStatusLabel.setText(
-                        "Error Saving Report!");
-            }
-        });
+                                semesterGpaField.clear();
 
-        submitButton.setOnAction(e -> {
+                        } catch (Exception ex) {
 
-            String name = nameField.getText();
-            String regNo = regField.getText();
-            String dept = deptField.getText();
-            String sem = semField.getText();
+                                cgpaResultLabel.setText(
+                                                "Enter valid GPA");
+                        }
+                });
 
-            resultLabel.setText(
-                    "Name : " + name +
-                            "\nRegister No : " + regNo +
-                            "\nDepartment : " + dept +
-                            "\nSemester : " + sem);
-        });
+                calculateCgpaButton.setOnAction(e -> {
 
-        VBox root = new VBox(15);
+                        if (gpaList.isEmpty()) {
 
-        root.setPadding(new Insets(20));
-        root.setStyle(
-                "-fx-background-color: #f5f7fa;");
+                                cgpaResultLabel.setText(
+                                                "No GPA entered");
 
-        root.setPrefWidth(500);
+                                return;
+                        }
 
-        root.setPadding(new Insets(20));
+                        double total = 0;
 
-        root.getChildren().addAll(
+                        for (double gpa : gpaList) {
 
-                title,
+                                total += gpa;
+                        }
 
-                studentSection,
+                        double cgpa = total / gpaList.size();
 
-                nameField,
-                regField,
-                deptField,
-                semField,
+                        cgpaResultLabel.setText(
+                                        "CGPA : "
+                                                        + String.format(
+                                                                        "%.2f",
+                                                                        cgpa));
+                });
 
-                subjectSection,
+                saveButton.setOnAction(e -> {
 
-                subjectField,
-                creditField,
-                gradeBox,
-                addSubjectButton,
+                        try {
 
-                table,
+                                java.io.FileWriter writer = new java.io.FileWriter(
+                                                "student_report.txt");
 
-                resultSection,
+                                writer.write(
+                                                "STUDENT ACADEMIC REPORT\n\n");
 
-                calculateButton,
-                gpaLabel,
+                                writer.write(
+                                                "Name : "
+                                                                + nameField.getText()
+                                                                + "\n");
 
-                saveButton,
-                saveStatusLabel,
+                                writer.write(
+                                                "Register No : "
+                                                                + regField.getText()
+                                                                + "\n");
 
-                submitButton,
-                resultLabel);
+                                writer.write(
+                                                "Department : "
+                                                                + deptField.getText()
+                                                                + "\n");
 
-        Scene scene = new Scene(root, 700, 700);
+                                writer.write(
+                                                "Semester : "
+                                                                + semField.getText()
+                                                                + "\n\n");
 
-        stage.setTitle("Student Academic Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
+                                writer.write(
+                                                subjectsArea.getText());
 
-    public static void main(String[] args) {
-        launch();
-    }
+                                writer.write("\n\n");
+
+                                writer.write(
+                                                gpaLabel.getText());
+
+                                writer.close();
+
+                                saveStatusLabel.setText(
+                                                "Report Saved Successfully!");
+
+                        } catch (Exception ex) {
+
+                                saveStatusLabel.setText(
+                                                "Error Saving Report!");
+                        }
+                });
+
+                submitButton.setOnAction(e -> {
+
+                        String name = nameField.getText();
+                        String regNo = regField.getText();
+                        String dept = deptField.getText();
+                        String sem = semField.getText();
+
+                        resultLabel.setText(
+                                        "Name : " + name +
+                                                        "\nRegister No : " + regNo +
+                                                        "\nDepartment : " + dept +
+                                                        "\nSemester : " + sem);
+                });
+
+                VBox root = new VBox(15);
+
+                root.setPadding(new Insets(20));
+                root.setStyle(
+                                "-fx-background-color: #f5f7fa;");
+
+                root.setPrefWidth(500);
+
+                root.setPadding(new Insets(20));
+
+                root.getChildren().addAll(
+
+                                title,
+
+                                studentSection,
+
+                                nameField,
+                                regField,
+                                deptField,
+                                semField,
+
+                                subjectSection,
+
+                                subjectField,
+                                creditField,
+                                gradeBox,
+                                addSubjectButton,
+
+                                table,
+
+                                resultSection,
+
+                                calculateButton,
+                                gpaLabel,
+
+                                saveButton,
+                                saveStatusLabel,
+                                cgpaSection,
+
+                                semesterGpaField,
+
+                                addGpaButton,
+
+                                cgpaArea,
+
+                                calculateCgpaButton,
+
+                                cgpaResultLabel,
+
+                                submitButton,
+                                resultLabel);
+
+                ScrollPane scrollPane = new ScrollPane(root);
+
+                scrollPane.setFitToWidth(true);
+
+                Scene scene = new Scene(scrollPane, 700, 700);
+
+                stage.setTitle("Student Academic Tracker");
+                stage.setScene(scene);
+                stage.show();
+        }
+
+        public static void main(String[] args) {
+                launch();
+        }
 }
