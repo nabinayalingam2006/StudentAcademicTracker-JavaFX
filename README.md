@@ -1,22 +1,26 @@
-# Student Academic Tracker - JavaFX
+# Student Academic Performance Tracker (JavaFX)
 
-A JavaFX-based Student Academic Performance Tracker.
+## Overview
+
+A JavaFX-based desktop application that helps students manage academic performance by calculating GPA, CGPA, analyzing grades, and generating reports.
 
 ## Features
-- Student Information Management
-- Subject Management
-- GPA Calculator
-- Performance Classification
-- Report Saving
-- TableView Display
+
+* Student Information Management
+* Subject Management
+* GPA Calculator
+* CGPA Calculator
+* Grade Distribution Pie Chart
+* Performance Analysis
+* Save Report to File
+* Dark Theme User Interface
 
 ## Technologies Used
-- Java 17
-- JavaFX
-- OOP Concepts
 
-## Future Enhancements
-- CGPA Calculator
-- Charts and Analytics
-- Modern UI Design
-- Database Integration
+* Java 17
+* JavaFX
+* VS Code
+
+## Author
+
+Abinaya 
