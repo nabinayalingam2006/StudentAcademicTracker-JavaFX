@@ -1,0 +1,15 @@
+STUDENT ACADEMIC REPORT
+
+Name : abi
+Register No : 01
+Department : it
+Semester : 3
+
+Subject | Credit | Grade
+-------------------------
+dsa    |    4    |    O
+dbms    |    3    |    A+
+
+
+GPA : 9.57
+Performance : Outstanding

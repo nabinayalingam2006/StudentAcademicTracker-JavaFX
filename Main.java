@@ -1,10 +1,11 @@
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.chart.PieChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -15,6 +16,11 @@ public class Main extends Application {
 
                 Label title = new Label("Student Academic Tracker");
 
+                title.setStyle(
+                                "-fx-font-size:24px;" +
+                                                "-fx-font-weight:bold;" +
+                                                "-fx-text-fill:white;");
+
                 Label studentSection = new Label("Student Information");
 
                 Label subjectSection = new Label("Subject Details");
@@ -22,17 +28,19 @@ public class Main extends Application {
                 Label resultSection = new Label("Results");
 
                 studentSection.setStyle(
-                                "-fx-font-size:16px; -fx-font-weight:bold;");
+                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;" +
+                                                "-fx-text-fill:white;");
 
                 subjectSection.setStyle(
-                                "-fx-font-size:16px; -fx-font-weight:bold;");
+                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;" +
+                                                "-fx-text-fill:white;");
 
                 resultSection.setStyle(
-                                "-fx-font-size:16px; -fx-font-weight:bold;");
-
-                title.setStyle(
-                                "-fx-font-size: 22px;" +
-                                                "-fx-font-weight: bold;");
+                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;" +
+                                                "-fx-text-fill:white;");
 
                 TextField nameField = new TextField();
                 nameField.setPromptText("Enter Student Name");
@@ -52,7 +60,9 @@ public class Main extends Application {
                 TextField creditField = new TextField();
                 creditField.setPromptText("Credit");
 
-                Button submitButton = new Button("Submit");
+                String buttonStyle = "-fx-background-color:#4CAF50;" +
+                                "-fx-text-fill:white;" +
+                                "-fx-font-weight:bold;";
 
                 ComboBox<String> gradeBox = new ComboBox<>();
 
@@ -75,14 +85,14 @@ public class Main extends Application {
                 Button saveButton = new Button("Save Report");
                 saveButton.setPrefWidth(150);
 
-                Label resultLabel = new Label();
-
                 Label cgpaSection = new Label("CGPA Calculator");
 
                 cgpaSection.setStyle(
-                                "-fx-font-size:16px; -fx-font-weight:bold;");
+                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;" +
+                                                "-fx-text-fill:white;");
 
-                Label gpaLabel = new Label("GPA will appear here");
+                Label gpaLabel = new Label("GPA RESULT HERE");
 
                 TextField semesterGpaField = new TextField();
 
@@ -93,6 +103,12 @@ public class Main extends Application {
 
                 Button calculateCgpaButton = new Button("Calculate CGPA");
 
+                addSubjectButton.setStyle(buttonStyle);
+                calculateButton.setStyle(buttonStyle);
+                saveButton.setStyle(buttonStyle);
+                addGpaButton.setStyle(buttonStyle);
+                calculateCgpaButton.setStyle(buttonStyle);
+
                 TextArea cgpaArea = new TextArea();
                 cgpaArea.setPrefHeight(120);
 
@@ -100,12 +116,22 @@ public class Main extends Application {
 
                 Label cgpaResultLabel = new Label();
 
+                Label chartTitle = new Label("Grade Distribution");
+                chartTitle.setStyle(
+                                "-fx-text-fill:white;" +
+                                                "-fx-font-size:18px;" +
+                                                "-fx-font-weight:bold;");
+
+                PieChart gradeChart = new PieChart();
+
+                gradeChart.setLabelsVisible(true);
+                gradeChart.setLegendVisible(true);
+                gradeChart.setPrefHeight(300);
+
+                gradeChart.setStyle(
+                                "-fx-text-fill:white;");
                 gpaLabel.setWrapText(true);
                 gpaLabel.setMinHeight(60);
-
-                gpaLabel.setStyle(
-                                "-fx-font-size:16px;" +
-                                                "-fx-font-weight:bold;");
 
                 TableView<SubjectData> table = new TableView<>();
 
@@ -157,6 +183,57 @@ public class Main extends Application {
 
                 java.util.ArrayList<Double> gpaList = new java.util.ArrayList<>();
 
+                int[] oCount = { 0 };
+                int[] aPlusCount = { 0 };
+                int[] aCount = { 0 };
+                int[] bPlusCount = { 0 };
+                int[] bCount = { 0 };
+                int[] cCount = { 0 };
+
+                subjectCol.setText("SUBJECT");
+                creditCol.setText("CREDIT");
+                gradeCol.setText("GRADE");
+
+                table.setStyle(
+                                "-fx-font-size:14px;");
+
+                table.setStyle(
+                                "-fx-control-inner-background:#2d2d2d;" +
+                                                "-fx-text-background-color:white;");
+
+                gpaLabel.setStyle(
+                                "-fx-text-fill:white;" +
+                                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;");
+
+                cgpaResultLabel.setStyle(
+                                "-fx-text-fill:white;" +
+                                                "-fx-font-size:16px;" +
+                                                "-fx-font-weight:bold;");
+
+                String fieldStyle = "-fx-control-inner-background:#2d2d2d;" +
+                                "-fx-text-fill:white;" +
+                                "-fx-prompt-text-fill:gray;";
+
+                nameField.setStyle(fieldStyle);
+                regField.setStyle(fieldStyle);
+                deptField.setStyle(fieldStyle);
+                semField.setStyle(fieldStyle);
+                subjectField.setStyle(fieldStyle);
+                creditField.setStyle(fieldStyle);
+                semesterGpaField.setStyle(fieldStyle);
+
+                table.setStyle(
+                                "-fx-control-inner-background:#2d2d2d;" +
+                                                "-fx-table-cell-border-color:#444444;" +
+                                                "-fx-text-background-color:white;");
+
+                table.lookupAll(".column-header").forEach(node -> node.setStyle("-fx-background-color:#3c3f41;"));
+
+                cgpaArea.setStyle(
+                                "-fx-control-inner-background:#2d2d2d;" +
+                                                "-fx-text-fill:white;");
+
                 addSubjectButton.setOnAction(e -> {
 
                         String subject = subjectField.getText();
@@ -166,6 +243,33 @@ public class Main extends Application {
                         String grade = gradeBox.getValue();
 
                         int gradePoint = 0;
+
+                        switch (grade) {
+
+                                case "O":
+                                        oCount[0]++;
+                                        break;
+
+                                case "A+":
+                                        aPlusCount[0]++;
+                                        break;
+
+                                case "A":
+                                        aCount[0]++;
+                                        break;
+
+                                case "B+":
+                                        bPlusCount[0]++;
+                                        break;
+
+                                case "B":
+                                        bCount[0]++;
+                                        break;
+
+                                case "C":
+                                        cCount[0]++;
+                                        break;
+                        }
 
                         switch (grade) {
                                 case "O":
@@ -252,6 +356,20 @@ public class Main extends Application {
 
                                 performance = "Needs Improvement";
                         }
+
+                        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
+
+                                        new PieChart.Data("O", oCount[0]),
+                                        new PieChart.Data("A+", aPlusCount[0]),
+                                        new PieChart.Data("A", aCount[0]),
+                                        new PieChart.Data("B+", bPlusCount[0]),
+                                        new PieChart.Data("B", bCount[0]),
+                                        new PieChart.Data("C", cCount[0]));
+
+                        gradeChart.setData(pieData);
+
+                        gradeChart.lookup(".chart-title").setStyle(
+                                        "-fx-text-fill: white;");
 
                         gpaLabel.setText(
                                         "GPA : "
@@ -362,25 +480,12 @@ public class Main extends Application {
                         }
                 });
 
-                submitButton.setOnAction(e -> {
-
-                        String name = nameField.getText();
-                        String regNo = regField.getText();
-                        String dept = deptField.getText();
-                        String sem = semField.getText();
-
-                        resultLabel.setText(
-                                        "Name : " + name +
-                                                        "\nRegister No : " + regNo +
-                                                        "\nDepartment : " + dept +
-                                                        "\nSemester : " + sem);
-                });
-
-                VBox root = new VBox(15);
+                VBox root = new VBox(20);
 
                 root.setPadding(new Insets(20));
+
                 root.setStyle(
-                                "-fx-background-color: #f5f7fa;");
+                                "-fx-background-color: #1e1e1e;");
 
                 root.setPrefWidth(500);
 
@@ -405,6 +510,8 @@ public class Main extends Application {
                                 addSubjectButton,
 
                                 table,
+                                chartTitle,
+                                gradeChart,
 
                                 resultSection,
 
@@ -423,16 +530,15 @@ public class Main extends Application {
 
                                 calculateCgpaButton,
 
-                                cgpaResultLabel,
+                                cgpaResultLabel
 
-                                submitButton,
-                                resultLabel);
+                );
 
                 ScrollPane scrollPane = new ScrollPane(root);
 
                 scrollPane.setFitToWidth(true);
 
-                Scene scene = new Scene(scrollPane, 700, 700);
+                Scene scene = new Scene(scrollPane, 900, 800);
 
                 stage.setTitle("Student Academic Tracker");
                 stage.setScene(scene);
